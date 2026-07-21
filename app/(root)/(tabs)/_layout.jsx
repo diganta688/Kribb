@@ -1,31 +1,61 @@
-import { Icon, Label, NativeTabs } from "expo-router/unstable-native-tabs";
+import { Tabs } from "expo-router";
+import { Calculator, Heart, House, Search, User } from "lucide-react-native";
 
 export default function TabLayout() {
   return (
-    <NativeTabs>
-      <NativeTabs.Trigger name="index">
-        <Label>Home</Label>
-        {/* Added md="home" for Android */}
-        <Icon sf="house.fill" md="home" />
-      </NativeTabs.Trigger>
+    <Tabs
+      screenOptions={{
+        headerShown: false,
+        tabBarActiveTintColor: "#3b82f6",
+        tabBarInactiveTintColor: "#9ca3af",
 
-      <NativeTabs.Trigger name="saved">
-        {/* Added md="favorite" for Android */}
-        <Icon sf="heart.fill" md="favorite" />
-        <Label>saved</Label>
-      </NativeTabs.Trigger>
+        tabBarStyle: {
+          height: 65,
+          paddingBottom: 8,
+          paddingTop: 8,
+        },
+      }}
+    >
+      <Tabs.Screen
+        name="index"
+        options={{
+          title: "Home",
+          tabBarIcon: ({ color, size }) => <House color={color} size={size} />,
+        }}
+      />
 
-      <NativeTabs.Trigger name="profile">
-        {/* Added md="person" for Android */}
-        <Icon sf="person.fill" md="person" />
-        <Label>profile</Label>
-      </NativeTabs.Trigger>
+      <Tabs.Screen
+        name="saved"
+        options={{
+          title: "Saved",
+          tabBarIcon: ({ color, size }) => <Heart color={color} size={size} />,
+        }}
+      />
 
-      <NativeTabs.Trigger name="search">
-        {/* Added md="search" for Android */}
-        <Icon sf="magnifyingglass" md="search" />
-        <Label>search</Label>
-      </NativeTabs.Trigger>
-    </NativeTabs>
+      <Tabs.Screen
+        name="search"
+        options={{
+          title: "Search",
+          tabBarIcon: ({ color, size }) => <Search color={color} size={size} />,
+        }}
+      />
+
+      <Tabs.Screen
+        name="profile"
+        options={{
+          title: "Profile",
+          tabBarIcon: ({ color, size }) => <User color={color} size={size} />,
+        }}
+      />
+      <Tabs.Screen
+        name="Calculator"
+        options={{
+          title: "Calculator",
+          tabBarIcon: ({ color, size }) => (
+            <Calculator color={color} size={size} />
+          ),
+        }}
+      />
+    </Tabs>
   );
 }
