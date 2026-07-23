@@ -1,12 +1,14 @@
 import { router } from "expo-router";
 import { Calculator, Delete } from "lucide-react-native";
 import React, { useState } from "react";
-import { Pressable, Text, View } from "react-native";
+import { Pressable, Text, useColorScheme, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function CalculatorMain() {
   const [expression, setExpression] = useState("");
   const [result, setResult] = useState("0");
+  const colorScheme = useColorScheme();
+  const isDarkMode = colorScheme === "dark";
 
   const handlePress = (value: string) => {
     if (value === "=") {
@@ -40,8 +42,10 @@ export default function CalculatorMain() {
       const value = eval(exp);
 
       setResult(String(value));
-    } catch {
-      setResult("Error");
+    } catch (error:any) {
+      setResult("error");
+      console.log(result);
+      
     }
   };
 
@@ -54,7 +58,9 @@ export default function CalculatorMain() {
   ];
 
   return (
-    <SafeAreaView className="flex-1 bg-zinc-950 px-5 pt-5">
+    <SafeAreaView
+      className={`flex-1  px-5 pt-5 ${isDarkMode ? "bg-black" : "bg-red-500"}`}
+    >
       {/* Header */}
       <View className="flex-row justify-between items-center mb-8">
         <View className="flex-row items-center gap-2">
@@ -62,7 +68,7 @@ export default function CalculatorMain() {
           <Text className="text-white text-2xl font-bold">Calculator</Text>
         </View>
 
-        <Pressable onPress={() => router.push("/(root)/(tabs)/Calculator")}>
+        <Pressable onPress={() => router.push("/(root)/(tabs)/CalculatorMain")}>
           <Text className="text-blue-500 text-lg">Back</Text>
         </Pressable>
       </View>
