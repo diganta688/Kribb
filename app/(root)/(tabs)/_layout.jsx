@@ -1,5 +1,5 @@
 import { Tabs } from "expo-router";
-import { Calculator, Heart, House, Search, User, View } from "lucide-react-native";
+import { Calculator, House, ListTodo, Search, User } from "lucide-react-native";
 
 export default function TabLayout() {
   return (
@@ -8,11 +8,14 @@ export default function TabLayout() {
         headerShown: false,
         tabBarActiveTintColor: "#3b82f6",
         tabBarInactiveTintColor: "#9ca3af",
-
         tabBarStyle: {
           height: 65,
-          paddingBottom: 8,
+          paddingBottom: 10,
           paddingTop: 8,
+        },
+        tabBarLabelStyle: {
+          fontSize: 12,
+          fontWeight: "500",
         },
       }}
     >
@@ -28,7 +31,9 @@ export default function TabLayout() {
         name="todo"
         options={{
           title: "Todo",
-          tabBarIcon: ({ color, size }) => <View color={color} size={size} />,
+          tabBarIcon: ({ color, size }) => (
+            <ListTodo color={color} size={size} />
+          ),
         }}
       />
 
@@ -47,6 +52,7 @@ export default function TabLayout() {
           tabBarIcon: ({ color, size }) => <User color={color} size={size} />,
         }}
       />
+
       <Tabs.Screen
         name="CalculatorMain"
         options={{
